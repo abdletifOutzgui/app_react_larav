@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RegisterRequest;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Tymon\JWTAuth\Exceptions\JWTException;
 
@@ -34,8 +35,9 @@ class AuthController extends Controller
         }
 
         return response()->json([
-            'success' => true,
-            'token'   => $token,
+            'success'       => true,
+            'token'         => $token,
+           // 'refresh_token' => auth()->refresh()
         ]);
     }
 
@@ -87,4 +89,10 @@ class AuthController extends Controller
         ], 201);
 
     }
+
+
+    // Refresh token
+    // public function refresh() {
+    //     return $this->respondWithToken(Auth::guard('api')->refresh());
+    // }
 }
